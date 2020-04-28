@@ -29,7 +29,12 @@
 #include <linux/device.h>
 #include <linux/slab.h>
 #include <linux/atomic.h>
+#include <linux/version.h>
+#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 4, 0)
 #include <linux/reservation.h>
+#else
+#include <linux/dma-resv.h>
+#endif
 #include <linux/dma-buf.h>
 #include <linux/wait.h>
 #include <linux/sched.h>

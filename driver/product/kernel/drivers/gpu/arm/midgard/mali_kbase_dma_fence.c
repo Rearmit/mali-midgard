@@ -30,7 +30,12 @@
 #include <linux/list.h>
 #include <linux/lockdep.h>
 #include <linux/mutex.h>
+#include <linux/version.h>
+#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 4, 0)
 #include <linux/reservation.h>
+#else
+#include <linux/dma-resv.h>
+#endif
 #include <linux/slab.h>
 #include <linux/spinlock.h>
 #include <linux/workqueue.h>
