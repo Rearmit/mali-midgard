@@ -25,8 +25,13 @@
 #include <backend/gpu/mali_kbase_device_internal.h>
 #include <backend/gpu/mali_kbase_pm_internal.h>
 
+#if (LINUX_VERSION_CODE < KERNEL_VERSION(5, 0, 0))
 void kbase_backend_get_gpu_time(struct kbase_device *kbdev, u64 *cycle_counter,
 				u64 *system_time, struct timespec *ts)
+#else
+void kbase_backend_get_gpu_time(struct kbase_device *kbdev, u64 *cycle_counter,
+				u64 *system_time, struct timespec64 *ts)
+#endif
 {
 	u32 hi1, hi2;
 
