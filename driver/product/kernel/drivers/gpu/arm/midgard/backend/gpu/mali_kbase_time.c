@@ -58,7 +58,12 @@ void kbase_backend_get_gpu_time(struct kbase_device *kbdev, u64 *cycle_counter,
 	} while (hi1 != hi2);
 
 	/* Record the CPU's idea of current time */
+#if (LINUX_VERSION_CODE < KERNEL_VERSION(5, 0, 0))
 	getrawmonotonic(ts);
+
+#else
+	ktime_get_raw_ts64(ts);
+#endif
 
 	kbase_pm_release_gpu_cycle_counter(kbdev);
 }
