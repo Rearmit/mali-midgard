@@ -37,7 +37,12 @@
  *			time in
  */
 void kbase_backend_get_gpu_time(struct kbase_device *kbdev, u64 *cycle_counter,
+#if (LINUX_VERSION_CODE < KERNEL_VERSION(5, 0, 0))
 				u64 *system_time, struct timespec *ts);
+
+#else
+				u64 *system_time, struct timespec64 *ts);
+#endif
 
 /**
  * kbase_wait_write_flush() -  Wait for GPU write flush
